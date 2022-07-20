@@ -1,0 +1,51 @@
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+} 
+
+.planetGallery {
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 20px;
+}
+
+.planetGallery div {
+    width: 33.33%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.planetGallery img {
+    width: 100%;
+}
+
+.planetGallery h2 {
+    text-align: center;
+}
+
+input {
+    width: 250px;
+    border: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.charactersGallery {
+    justify-content: center; 
+    padding: 20px;  
+}
+
+.charactersGallery div {
+    padding: 20px;
+}
+
+.charactersGallery img {
+    max-height: 300px;
+}
+
+.charactersGallery h3 {
+    text-align: center;
+}
