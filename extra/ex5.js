@@ -21,42 +21,46 @@ const startGame = () => {
 }
 
 const printQuestions = questions => {
-
     for (const question of questions) {
         const questionContainer$$ = document.createElement('div');
         questionContainer$$.classList.add('questionContainer');
         questionContainer$$.innerHTML = `
             <h2>${question.question}</h2>
         `
-        const answerCorrect$$ = document.createElement('p');
-        answerCorrect$$.classList.add('answer');
-        answerCorrect$$.innerHTML = question.correct_answer;
-
-
-        for (const answer of question.incorrect_answers) {
-            const answerNotCorrect$$ = document.createElement('p');
-            answerNotCorrect$$.classList.add('answer');
-            answerNotCorrect$$.innerHTML = answer;
-            questionContainer$$.appendChild(answerNotCorrect$$);
-            answerNotCorrect$$.addEventListener('click', () => checkAnswer(event, answerCorrect$$))
-        }
-
-        questionContainer$$.appendChild(answerCorrect$$)
-        gameBoard$$.appendChild(questionContainer$$);
-
-        answerCorrect$$.addEventListener('click', () => checkAnswer(event, answerCorrect$$));
-        
+        printAnswers(question, questionContainer$$);    
     }    
 }
 
+const printAnswers = (question, questionContainer$$) => {
+    const answerArr = [question.correct_answer];
+    
+    for (const answer of question.incorrect_answers) {
+        answerArr.push(answer)
+    }
 
-const checkAnswer = (event, answerCorrect$$) => {
-    if(event.target === answerCorrect$$) {
+    shuffleArray(answerArr);
+
+    for(let answer of answerArr) {
+        const answer$$ = document.createElement('p');
+        answer$$.innerHTML = answer;
+        answer$$.classList.add('answer')
+        questionContainer$$.appendChild(answer$$);
+        answer$$.addEventListener('click', () => checkAnswer(event, question));
+    }
+
+    gameBoard$$.appendChild(questionContainer$$);
+}
+
+const shuffleArray = answerArr => {
+    answerArr.sort(()=> Math.random() - 0.5);
+}
+
+const checkAnswer = (event, question) => {
+    if(event.target.outerText === question.correct_answer) {
         numCorrects++
     }else {
         numNotCorrects++
-    }
-    
+    }    
 }
 
 const showResult = (numCorrects, numNotCorrects) => {
@@ -65,7 +69,6 @@ const showResult = (numCorrects, numNotCorrects) => {
     resultP$$.innerHTML = `Respuestas correctas: ${numCorrects}. Respuestas incorrectas: ${numNotCorrects}`
     document.body.appendChild(resultP$$)
 }
-
 
 checkGame$$.addEventListener('click', () => showResult(numCorrects, numNotCorrects));
 startBtn$$.addEventListener('click', startGame);

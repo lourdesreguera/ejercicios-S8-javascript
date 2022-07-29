@@ -1,0 +1,18 @@
+.c-characters {
+    display: flex;
+}
+
+.c-characters div {
+    width: 20%;
+}
+
+.c-characters img {
+    width: 100%;
+    object-fit: cover;
+    height: 400px;
+    object-position: top;
+}
+
+.c-characters h2 {
+    text-align: center;
+}

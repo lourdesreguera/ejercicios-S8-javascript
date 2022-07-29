@@ -11,7 +11,6 @@ const search = () => {
 
 const print = (data) => {
     const p$$ = document.createElement('p');
-    
     let text = `El nombre ${data.name} tiene`;
 
     for (const country of data.country) {
